@@ -13,10 +13,11 @@ def introspection(variable):
       print(v + "= " + str(getattr(variable, v)))
 
 def isBold(style):
-  print("Gras: " +  ("Oui", "Non") [style.font.bold == True])
+  print(style.font.bold)
+  print("Gras: " +  ("Non", "Oui") [bool(style.font.bold) == True])
 
 def isItalic(style):
-  print("Italique: " + ("Oui", "Non") [style.font.italic == True])
+  print("Italique: " + ("Non", "Oui") [bool(style.font.italic) == True])
 
 def alignment(style):
     if (not style.paragraph_format):
@@ -130,18 +131,34 @@ styles = document.styles
 paragraphs = document.paragraphs
 images = document.inline_shapes
 
-print("---")
-checkStyles(styles, styleNames)
-print("---")
-checkEmptyParagraphs(paragraphs)
-print("---")
-print("Taux d'application des styles:")
-checkStylesApplied(paragraphs)
-print("---")
-print("Numéros de pages + table des matieres : à vérifier dans le docx")
-print("---")
-print("Texte remplacement premiere photo=" + str(images[0]._inline.docPr.get("descr")))
-print("Texte remplacement toutes photos")
-checkAltText(images)
+# print("---")
+# checkStyles(styles, styleNames)
+# print("---")
+# checkEmptyParagraphs(paragraphs)
+# print("---")
+# print("Taux d'application des styles:")
+# checkStylesApplied(paragraphs)
+# print("---")
+# print("Numéros de pages + table des matieres : à vérifier dans le docx")
+# print("---")
+# print("Texte remplacement premiere photo=" + str(images[0]._inline.docPr.get("descr")))
+# print("Texte remplacement toutes photos")
+# checkAltText(images)
 
+
+nTitle = textToStyle(paragraphs, "Title", ["Livre de recettes"])
+nHeading3 = textToStyle(paragraphs, "Heading 3", [u"Ingrédients", u"Réalisation"])
+nRecap = textToStyle(paragraphs, "Description", [u"Préparation\u00A0:"])
+
+print("W1 Appl Titre. " + str(nTitle*100) +"%")
+print("W2 nom prenom. : verif docx")
+print("W3. ")
+checkEmptyParagraphs(paragraphs)
+print("W4 saut 1ere page. verif docx")
+print("W5 Appl Titre 3. " + str(nHeading3*100) +"%")
+print("W6 7 8 10. " + str(checkStyles(styles, styleNames)))
+print("W9 Appl Descr. " + str(nRecap*100) +"%")
+print("W11 numero page. : verif docx")
+print("W12 tdm. verif docx ")
+print("W13 alt." + str(images[0]._inline.docPr.get("descr")))
 f.close()
