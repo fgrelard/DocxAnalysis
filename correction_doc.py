@@ -90,7 +90,7 @@ def checkEmptyParagraphs(paragraphs):
   for p in paragraphs:
     if (isempty(p)):
       count += 1
-  print("Nombre de paragraphes vides = " + str(count))
+  print("Nombre de paragraphes vides = " + str(count) + "/103 au depart")
 
 def textToStyle(paragraphs, styleName, text):
   countStyle = 0.0
