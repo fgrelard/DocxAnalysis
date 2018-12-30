@@ -13,7 +13,6 @@ def introspection(variable):
       print(v + "= " + str(getattr(variable, v)))
 
 def isBold(style):
-  print(style.font.bold)
   print("Gras: " +  ("Non", "Oui") [bool(style.font.bold) == True])
 
 def isItalic(style):
