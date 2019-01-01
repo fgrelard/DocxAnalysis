@@ -103,8 +103,8 @@ def textToStyle(paragraphs, styleName, text):
           if paragraph.style.name.lower() == styleName.lower():
             countStyle+=1
   if (countTotal == 0):
-    return 0
-  return countStyle/countTotal
+    return 0,0.1
+  return countStyle,countTotal
 
 
 def checkStylesApplied(paragraphs):
@@ -145,19 +145,21 @@ images = document.inline_shapes
 # checkAltText(images)
 
 
-nTitle = textToStyle(paragraphs, "Title", ["Livre de recettes"])
-nHeading3 = textToStyle(paragraphs, "Heading 3", [u"Ingrédients", u"Réalisation"])
-nRecap = textToStyle(paragraphs, "Description", [u"Préparation\u00A0:"])
+cTitle,cTitleTotal = textToStyle(paragraphs, "Title", ["Livre de recettes"])
+cHeading3, cHeading3Total = textToStyle(paragraphs, "Heading 3", [u"Ingrédients", u"Réalisation"])
+cRecap, cRecapTotal = textToStyle(paragraphs, "Description", [u"Préparation\u00A0:"])
+alt = images[0]._inline.docPr.get("descr")
 
-print("W1 Appl Titre. " + str(nTitle*100) +"%")
+print("W1 Appl Titre. " + str(cTitle/cTitleTotal*100) +"% (" + str(int(cTitleTotal)) + "/" + str(int(cTitle)) + ")")
 print("W2 nom prenom. : verif docx")
 print("W3. ")
 checkEmptyParagraphs(paragraphs)
 print("W4 saut 1ere page. verif docx")
-print("W5 Appl Titre 3. " + str(nHeading3*100) +"%")
+print("W5 Appl Titre 3. " + str(cHeading3/cHeading3Total*100) +"% (" + str(int(cHeading3)) + "/" + str(int(cHeading3Total)) + ")")
 print("W6 7 8 10. " + str(checkStyles(styles, styleNames)))
-print("W9 Appl Descr. " + str(nRecap*100) +"%")
+print("W9 Appl Descr. " + str(cRecap/cRecapTotal*100) +"% (" + str(int(cRecap)) + "/" + str(int(cRecapTotal)) + ")")
+print("W10. Saut de page recette/type plat : voir recap styles plus haut")
 print("W11 numero page. : verif docx")
 print("W12 tdm. verif docx ")
-print("W13 alt." + str(images[0]._inline.docPr.get("descr")))
+print("W13 alt." + alt)
 f.close()
