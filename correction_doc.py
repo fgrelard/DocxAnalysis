@@ -150,22 +150,26 @@ cHeading3, cHeading3Total = textToStyle(paragraphs, "Heading 3", [u"Ingrédients
 cRecap, cRecapTotal = textToStyle(paragraphs, "Description", [u"Préparation\u00A0:"])
 alt = images[0]._inline.docPr.get("descr")
 
-print("W1 Appl Titre. " + str(cTitle/cTitleTotal*100) +"% (" + str(int(cTitleTotal)) + "/" + str(int(cTitle)) + ")")
+
 if (int(cTitleTotal) ==0):
   print("W1. Probleme detecte, verifier le docx")
+else:
+  print("W1 Appl Titre. " + str(cTitle/cTitleTotal*100) +"% (" + str(int(cTitleTotal)) + "/" + str(int(cTitle)) + ")")
 print("W2 nom prenom. : verif docx")
 print("W3. ")
 checkEmptyParagraphs(paragraphs)
 print("W4 saut 1ere page. verif docx")
-print("W5 Appl Titre 3. " + str(cHeading3/cHeading3Total*100) +"% (" + str(int(cHeading3)) + "/" + str(int(cHeading3Total)) + ")")
 if (int(cHeading3Total) ==0):
   print("W5. Probleme detecte, verifier le docx")
+else:
+  print("W5 Appl Titre 3. " + str(cHeading3/cHeading3Total*100) +"% (" + str(int(cHeading3)) + "/" + str(int(cHeading3Total)) + ")")
 print("W6 7 8 10. " + str(checkStyles(styles, styleNames)))
-print("W9 Appl Descr. " + str(cRecap/cRecapTotal*100) +"% (" + str(int(cRecap)) + "/" + str(int(cRecapTotal)) + ")")
 if (int(cRecapTotal) ==0):
   print("W9. Probleme detecte, verifier le docx")
+else:
+  print("W9 Appl Descr. " + str(cRecap/cRecapTotal*100) +"% (" + str(int(cRecap)) + "/" + str(int(cRecapTotal)) + ")")
 print("W10. Saut de page recette/type plat : voir recap styles plus haut")
 print("W11 numero page. : verif docx")
 print("W12 tdm. verif docx ")
-print("W13 alt." + alt)
+print("W13 alt." + ("None",alt)[alt != None])
 f.close()
